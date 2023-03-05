@@ -1,0 +1,7 @@
+<ul *ngIf="list != null">
+    <li *ngFor="let movieBasic of list.records">
+        <a [routerLink]="['/movies', movieBasic.id]">
+            {{ movieBasic.name }}
+        </a>
+    </li>
+</ul>

@@ -1,0 +1,18 @@
+<mat-toolbar>
+    <span class="brand">Popcorn</span>
+    <button mat-button (click)="this.router.navigate(['/'])">
+        Home
+    </button>
+    <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.router.navigate(['/cart'])">
+        Cart
+    </button>
+    <button *ngIf="!authService.isAuthenticated()" mat-button (click)="this.router.navigate(['/login'])">
+        Login
+    </button>
+    <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.router.navigate(['/profile'])">
+        Profile
+    </button>
+    <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.authService.logout()">
+        Logout
+    </button>
+</mat-toolbar>

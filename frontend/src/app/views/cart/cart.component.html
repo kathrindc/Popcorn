@@ -1,0 +1,14 @@
+Cart:
+<ol *ngIf="cart != null">
+    <li *ngFor="let item of cart.items">
+        ShowId: {{item.showId}}
+        <ul *ngIf="item.seats != null">
+            <li *ngFor="let seat of item.seats">
+                Seat Number: {{seat}}
+            </li>
+        </ul>
+    </li>
+</ol>
+<button mat-raised-button color="primary" *ngIf="cart!=null&&cart.items.length > 0" (click)="purchase($event)">
+    Purchase
+</button>

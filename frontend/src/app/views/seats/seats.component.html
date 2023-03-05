@@ -1,0 +1,23 @@
+<table *ngIf="rows != null">
+    <tr *ngFor="let row of rows">
+        <td *ngFor="let seat of row">
+            <span
+                *ngIf="seat"
+                [class]="getSeatClass(seat)"
+                (click)="toggleSelect(seat)">
+                {{ seat.displayNum }}
+            </span>
+            <span
+                *ngIf="!seat"
+                class="seat-box"></span>
+        </td>
+    </tr>
+</table>
+<ul>
+    <li *ngFor="let seat of selectedSeats">
+        Sitz {{ seat.displayNum }}: {{ seat.flagDeluxe ? '15,90' : '11.90' }}
+    </li>
+</ul>
+<button mat-raised-button color="primary" *ngIf="selectedSeats.length > 0" (click)="addToCart($event)">
+    Add to Cart
+</button>
