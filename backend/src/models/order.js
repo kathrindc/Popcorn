@@ -47,7 +47,7 @@ async function getById(orderId) {
 
     const order = orderRes.rows[0];
     const ticketsRes = await pool.query(
-        `SELECT * FROM tickets WHERE "orderId" = $1`,
+        `SELECT t."showId" as "showId", t."seatId" as "seatId", s."movieId" as "movieId", m."name" as "movieName" FROM tickets t LEFT JOIN shows s ON t."showId" = s."id" LEFT JOIN movies m ON s."movieId" = m."id" WHERE t."orderId" = $1`,
         [orderId]
     );
 
