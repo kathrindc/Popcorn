@@ -200,6 +200,8 @@ fastify.start = async function (port) {
                 properties: {
                     showId: { type: 'string', minLength: 1 },
                     seatId: { type: 'string', minLength: 1 },
+                    movieId: { type: 'string', minLength: 1 },
+                    movieName: { type: 'string', minLength: 1 },
                 },
             });
 
