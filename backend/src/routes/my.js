@@ -355,7 +355,7 @@ module.exports = (fastify, _, done) => {
                 query: {
                     type: 'object',
                     properties: {
-                        page: { type: 'unrated' },
+                        unrated: { type: 'boolean' },
                     },
                 },
                 response: {
