@@ -24,7 +24,7 @@ fastify.start = async function (port) {
             });
 
             await fastify.register(require('@fastify/cors'), {
-                origin: process.env.CORS_ORIGIN || process.env.FRONTEND_URL,
+                origin: process.env.CORS_ORIGIN?.split?.(',') || process.env.FRONTEND_URL,
             });
 
             await fastify.register(require('@fastify/rate-limit'), {
