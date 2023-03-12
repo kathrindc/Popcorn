@@ -1,0 +1,24 @@
+<ul *ngIf="account != null" >
+    <li>
+        ID: {{ account.id }}
+    </li>
+    <li>
+        Email: {{ account.email }}
+    </li>
+    <li>
+        Name: <br>
+        {{ account.nameFirst }} {{ account.nameLast }}
+    </li>
+    <li>
+        Birthday: {{ account.birthday }}
+    </li>
+    <li>
+        Address: <br>
+        {{ account.addressLine1 }}<br>
+        {{ account.addressLine2 }}<br>
+        {{ account.addressPostcode }}<br>
+        {{ account.addressTown }}<br>
+        {{ account.addressState }}<br>
+        {{ account.addressCountry }}
+    </li>
+</ul>

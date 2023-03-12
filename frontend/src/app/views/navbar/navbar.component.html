@@ -12,6 +12,12 @@
     <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.router.navigate(['/profile'])">
         Profile
     </button>
+    <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.router.navigate(['/orders'])">
+        Orders
+    </button>
+    <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.router.navigate(['/reviews'])">
+        Reviews
+    </button>
     <button *ngIf="authService.isAuthenticated()" mat-button (click)="this.authService.logout()">
         Logout
     </button>

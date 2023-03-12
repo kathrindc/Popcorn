@@ -1,0 +1,26 @@
+<h2 mat-dialog-title>Leave a review</h2>
+<mat-dialog-content>
+    <form style="display: flex; flex-direction: column;">
+        <mat-form-field>
+            <mat-label>Select a movie</mat-label>
+            <mat-select [(value)]="movieId">
+                <mat-option *ngFor="let movie of reviewableMovies" [value]="movie.id">
+                    {{movie.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-label>Stars</mat-label>
+        <mat-slider min="1" max="5" step="1" showTickMarks discrete>
+            <input matSliderThumb [(value)]="stars">
+        </mat-slider>
+        <mat-form-field>
+            <mat-label>Review</mat-label>
+            <textarea matInput [value]="content" (input)="onContentChange($event)"></textarea>
+        </mat-form-field>
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="submit()">
+        Submit
+    </button>
+</mat-dialog-actions>

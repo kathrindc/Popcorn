@@ -13,12 +13,19 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
 import { SeatsComponent } from './views/seats/seats.component';
 import { CartComponent } from './views/cart/cart.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './views/login/login.component';
+import { ProfileComponent } from './views/profile/profile.component';
+import { OrdersComponent } from './views/orders/orders.component';
+import { ReviewsComponent, ReviewDialog } from './views/reviews/reviews.component';
+import { OrderDetailComponent } from './views/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +35,12 @@ import { LoginComponent } from './views/login/login.component';
     NavbarComponent,
     SeatsComponent,
     CartComponent,
-    LoginComponent
+    LoginComponent,
+    ProfileComponent,
+    OrdersComponent,
+    ReviewsComponent,
+    OrderDetailComponent,
+    ReviewDialog
   ],
   imports: [
     CommonModule,
@@ -50,6 +62,9 @@ import { LoginComponent } from './views/login/login.component';
     MatInputModule,
     MatToolbarModule,
     MatButtonModule,
+    MatDialogModule,
+    MatSelectModule,
+    MatSliderModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

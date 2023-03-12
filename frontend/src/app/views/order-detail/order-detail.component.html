@@ -1,0 +1,11 @@
+<ul *ngIf="orderDetail != null">
+    Order-Id: {{ orderDetail.id }} <br>
+    Completion-Status: {{ orderDetail.complete }} <br>
+    Submission-Date: {{ orderDetail.submittedAt}} <br>
+    Completion-Date: {{ orderDetail.completedAt }}
+    Tickets: 
+    <li *ngFor="let ticket of orderDetail.tickets">
+        Show-Id: {{ ticket.showId }}
+        Seat-Id: {{ ticket.seatId }}
+    </li>
+</ul>

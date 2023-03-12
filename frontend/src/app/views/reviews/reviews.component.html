@@ -1,0 +1,11 @@
+<button mat-raised-button color="primary" (click)="openReviewDialog()">
+    New Review
+</button>
+
+<ul *ngIf="list">
+    <li *ngFor="let rating of list.records">
+        Movie: {{ rating.movieName }}<br/>
+        Stars: {{ rating.stars }}<br/>
+        Content: {{ rating.content }}
+    </li>
+</ul>

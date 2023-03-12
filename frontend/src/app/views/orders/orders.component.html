@@ -1,0 +1,12 @@
+<ul *ngIf="list != null">
+    <li *ngFor="let order of list.records">
+        Order-Id: 
+        <a [routerLink]="['/orders', order.id]">
+            {{ order.id }}
+        </a>
+        <br>
+        Completion-Status: {{ order.complete }} <br>
+        Submission-Date: {{ order.submittedAt}} <br>
+        Completion-Date: {{ order.completedAt }}
+    </li>
+</ul>

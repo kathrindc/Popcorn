@@ -1,12 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import Account from '../data/account';
 import MovieBasic from '../data/movieBasic';
 import MovieDetail from '../data/movieDetail';
+import OrderDetail from '../data/orderDetail';
+import List from '../data/list';
+import Review from '../data/review';
 import Seat from '../data/seat';
 import Show from '../data/show';
 import Showing from '../data/showing';
 import Page from './page';
+import Order from '../data/order';
+import MovieMini from '../data/movieMini';
 
 @Injectable({
   providedIn: 'root'
@@ -53,4 +59,36 @@ export class MovieService {
     }) as Observable<Show>;
   }
 
+  getOrders(): Observable<List<Order>>{
+    return this.httpClient.get(`${this.ApiUrl}my/orders`,
+    {responseType: 'json',
+  }) as Observable<List<Order>>
+  }
+
+  getOrderDetail(id: string): Observable<OrderDetail>{
+    return this.httpClient.get(`${this.ApiUrl}my/orders/${id}`,
+    {responseType: 'json',
+  }) as Observable<OrderDetail>
+  }
+
+  getAccountInfo(): Observable<Account>{
+    return this.httpClient.get(`${this.ApiUrl}my/account`,
+    {responseType: 'json',
+  }) as Observable<Account>
+  }
+  
+  getReviews(): Observable<List<Review>>{
+    return this.httpClient.get(`${this.ApiUrl}my/ratings`,
+    {responseType: 'json',
+  }) as Observable<List<Review>>
+  }
+
+  submitReview(movieId: string, stars: number, content: string): Observable<string> {
+    return this.httpClient.post(`${this.ApiUrl}my/ratings`, {movieId, stars, content}, { responseType: 'text' }) as Observable<string>
+  }
+
+  getReviewableMovies(): Observable<MovieMini[]> {
+    return this.httpClient.get(`${this.ApiUrl}my/movies?unrated=true`,
+    {responseType: 'json'}) as Observable<MovieMini[]>
+  }
 }

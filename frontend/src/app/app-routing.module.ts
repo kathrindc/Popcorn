@@ -5,6 +5,10 @@ import { CartComponent } from './views/cart/cart.component';
 import { DetailComponent } from './views/detail/detail.component';
 import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
+import { OrderDetailComponent } from './views/order-detail/order-detail.component';
+import { OrdersComponent } from './views/orders/orders.component';
+import { ProfileComponent } from './views/profile/profile.component';
+import { ReviewsComponent } from './views/reviews/reviews.component';
 import { SeatsComponent } from './views/seats/seats.component';
 
 const routes: Routes = [
@@ -29,6 +33,30 @@ const routes: Routes = [
   path:'cart',
   pathMatch: 'full',
   component: CartComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'profile',
+  pathMatch: 'full',
+  component: ProfileComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'orders',
+  pathMatch: 'full',
+  component: OrdersComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'orders/:id',
+  pathMatch: 'full',
+  component: OrderDetailComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'reviews',
+  pathMatch: 'full',
+  component: ReviewsComponent,
   canActivate: [AuthGuard]
 },
 {
