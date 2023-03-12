@@ -5,7 +5,7 @@ async function getPage(page, size) {
         'SELECT COUNT(*) as num FROM ratings'
     )).rows[0].num);
     const res = await pool.query(
-        'SELECT "id", "movieId", "userId", "stars", "content" FROM ratings OFFSET $1 LIMIT $2',
+        'SELECT r0."id" as "id", r0."movieId" as "movieId", m0."name" as "movieName", r0."userId" as "userId", r0."stars" as "stars", r0."content" as "content" FROM ratings r0 LEFT JOIN movies m0 ON r0."movieId" = m0."id" OFFSET $1 LIMIT $2',
         [(page - 1) * size, size]
     );
 

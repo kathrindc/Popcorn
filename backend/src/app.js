@@ -239,6 +239,7 @@ fastify.start = async function (port) {
                     id: { type: 'string' },
                     userId: { type: 'string' },
                     movieId: { type: 'string' },
+                    movieName: { type: 'string' },
                     stars: { type: 'integer', minimum: 1, maximum: 5 },
                     content: { type: 'string' },
                 },
