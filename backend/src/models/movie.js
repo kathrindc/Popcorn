@@ -17,6 +17,15 @@ async function getPage(include_inactive, page, size) {
     };
 }
 
+async function getAllByUser(user_id, only_unrated) {
+    const res = await pool.query(
+        `SELECT m0."id" as "id", m0."name" as "name", m0."posterUrl" as "posterUrl" FROM tickets t0 LEFT JOIN order o0 ON t0."orderId" = o0."id" LEFT JOIN shows s0 ON t0."showId" = s0."id" LEFT JOIN movies m0 ON s0."movieId" = m0."id" WHERE o0."userId" = $1 ${only_unrated ? 'AND (SELECT COUNT(*) FROM ratings r0 WHERE r0."userId" = $1 AND r0."movieId" = m0."id") < 1' : ''} GROUP BY m0."id"`,
+        [user_id]
+    );
+
+    return res.rows;
+}
+
 async function getById(id) {
     const res = await pool.query(
         'SELECT * FROM movies WHERE "id" = $1',
@@ -60,4 +69,4 @@ async function remove(movieId) {
     return res.rowCount == 1;
 }
 
-module.exports = { exists, getPage, getById, add, update, remove };
+module.exports = { exists, getPage, getAllByUser, getById, add, update, remove };
