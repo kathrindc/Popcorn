@@ -19,7 +19,7 @@ async function getPage(page, size) {
 
 async function getPageByUser(page, size, userId) {
     const total = +((await pool.query(
-        'SELECT COUNT(*) as num FROM ratings WHERE userId = $1',
+        'SELECT COUNT(*) as "num" FROM ratings WHERE "userId" = $1',
         [userId]
     )).rows[0].num);
     const res = await pool.query(
