@@ -105,3 +105,6 @@ dist
 
 # Visual Studio Code configuration files
 .vscode
+
+# Local docker-compose deployment
+docker-compose.yml
