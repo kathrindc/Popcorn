@@ -342,6 +342,53 @@ module.exports = (fastify, _, done) => {
         }
     );
 
+    fastify.get('/movies',
+        {
+            onRequest: [
+                fastify.authenticate(),
+            ],
+            schema: {
+                summary: 'Get a page of the client\'s movies',
+                description: 'The client may use this route to retrieve a list of movies for which they have previously purchased tickets.',
+                tags: ['users', 'movies'],
+                security: [{ bearer: [] }],
+                query: {
+                    type: 'object',
+                    properties: {
+                        page: { type: 'unrated' },
+                    },
+                },
+                response: {
+                    200: {
+                        description: 'The client successfully retrieved a page of their watched movies.',
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                id: { type: 'string' },
+                                name: { type: 'string' },
+                                posterUrl: { type: 'string' },
+                            }
+                        },
+                    },
+                    400: {
+                        description: 'The client sent a malformed request.',
+                        $ref: 'error',
+                    },
+                    401: {
+                        description: 'The client is not authenticated.',
+                        $ref: 'error',
+                    },
+                },
+            },
+        },
+        async (request, _reply) => {
+            const onlyUnrated = (request.query.unrated == true) || false;
+
+            return await Movie.getAllByUser(request.user.id, onlyUnrated);
+        }
+    );
+
     fastify.post('/ratings',
         {
             onRequest: [
