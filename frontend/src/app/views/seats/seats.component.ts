@@ -47,14 +47,14 @@ export class SeatsComponent implements OnInit {
             rows.push(row);
             row = [];
           }
-          
+
           nextX += 1;
 
           while (nextX < seat.displayX) {
             nextX += 1;
             row.push(null);
           }
-          
+
           row.push(seat);
         }
 
@@ -90,7 +90,7 @@ export class SeatsComponent implements OnInit {
     if (!seat.isFree) {
       return;
     }
-    
+
     this.selectionMap[seat.id] = this.selectionMap[seat.id] ? null : seat;
     this.updateSeats();
   }

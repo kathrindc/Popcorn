@@ -1,8 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { lastValueFrom } from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {JwtHelperService} from '@auth0/angular-jwt';
+import {firstValueFrom, lastValueFrom, map, Observable, pluck} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -15,20 +15,34 @@ export class AuthService {
     public jwtHelper: JwtHelperService,
     public httpClient: HttpClient,
     public router: Router,
-  ) { }
+  ) {
+  }
 
-  public isAuthenticated() : boolean {
+  public isAuthenticated(): boolean {
     const token = localStorage.getItem('auth');
 
     return !this.jwtHelper.isTokenExpired(token);
   }
 
-  public async tryLogin(email: string, password: string) : Promise<boolean> {
+  public getRole(): Observable<string> {
+    let headers: HttpHeaders = new HttpHeaders();
+    headers.append('Accept', 'application/json');
+    headers.append('Authorization', `Bearer ${localStorage.getItem('auth')}`);
+
+    const observable = this.httpClient.get(
+      `${this.ApiUrl}/my/account`,
+      {headers: headers}
+    );
+
+    return observable.pipe(map((x: any) => x.role));
+  }
+
+  public async tryLogin(email: string, password: string): Promise<boolean> {
     const observable = this.httpClient.post(
       `${this.ApiUrl}/auth/login`,
-      { email, password }
+      {email, password}
     );
-    const {token} = (await lastValueFrom(observable)) as {token: string};
+    const {token} = (await lastValueFrom(observable)) as { token: string };
 
     if (token) {
       localStorage.setItem('auth', token);

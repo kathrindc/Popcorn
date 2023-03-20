@@ -10,6 +10,7 @@ import { OrdersComponent } from './views/orders/orders.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { ReviewsComponent } from './views/reviews/reviews.component';
 import { SeatsComponent } from './views/seats/seats.component';
+import {ManagementComponent} from "./views/management/management.component";
 
 const routes: Routes = [
 
@@ -63,6 +64,11 @@ const routes: Routes = [
   path:'login',
   pathMatch: 'full',
   component: LoginComponent,
+},
+{
+  path:'management',
+  pathMatch: 'full',
+  component: ManagementComponent,
 }
 
 ];

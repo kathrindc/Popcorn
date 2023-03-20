@@ -26,6 +26,7 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { OrdersComponent } from './views/orders/orders.component';
 import { ReviewsComponent, ReviewDialog } from './views/reviews/reviews.component';
 import { OrderDetailComponent } from './views/order-detail/order-detail.component';
+import { ManagementComponent } from './views/management/management.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { OrderDetailComponent } from './views/order-detail/order-detail.componen
     SeatsComponent,
     CartComponent,
     LoginComponent,
+    ManagementComponent,
     ProfileComponent,
     OrdersComponent,
     ReviewsComponent,
@@ -48,16 +50,13 @@ import { OrderDetailComponent } from './views/order-detail/order-detail.componen
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('auth'),
         allowedDomains: ['popcorn-api.toast.ws']
       }
     }),
-    
     FormsModule,
-    
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
