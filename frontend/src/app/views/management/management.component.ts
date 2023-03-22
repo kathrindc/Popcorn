@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from "../../auth/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-management',
@@ -7,10 +8,11 @@ import { AuthService } from "../../auth/auth.service";
   styleUrls: ['./management.component.scss']
 })
 export class ManagementComponent {
-  private role: string | undefined;
+  private role: string = "";
 
   constructor(
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router,
   ) {
   }
 
@@ -25,8 +27,24 @@ export class ManagementComponent {
     });
   }
 
-  hasRole(role: string): boolean {
-    return this.role === role;
+  hasRole(roles: string[]): boolean {
+    return roles.includes(this.role);
+  }
+
+  navigateToTheaters() {
+    this.router.navigate(['management/theaters']);
+  }
+
+  navigateToMovies() {
+    this.router.navigate(['management/movies']);
+  }
+
+  navigateToSchedule() {
+    this.router.navigate(['management/schedule']);
+  }
+
+  navigateToTickets() {
+    this.router.navigate(['management/tickets']);
   }
 
 }

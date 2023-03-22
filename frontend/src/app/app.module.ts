@@ -27,6 +27,12 @@ import { OrdersComponent } from './views/orders/orders.component';
 import { ReviewsComponent, ReviewDialog } from './views/reviews/reviews.component';
 import { OrderDetailComponent } from './views/order-detail/order-detail.component';
 import { ManagementComponent } from './views/management/management.component';
+import {MoviesComponent} from "./views/management/movies/movies.component";
+import {TheatersComponent} from "./views/management/theaters/theaters.component";
+import {ScheduleComponent} from "./views/management/schedule/schedule.component";
+import {TicketsComponent} from "./views/management/tickets/tickets.component";
+import {MatCard, MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -42,7 +48,11 @@ import { ManagementComponent } from './views/management/management.component';
     OrdersComponent,
     ReviewsComponent,
     OrderDetailComponent,
-    ReviewDialog
+    ReviewDialog,
+    MoviesComponent,
+    TheatersComponent,
+    ScheduleComponent,
+    TicketsComponent
   ],
   imports: [
     CommonModule,
@@ -64,6 +74,8 @@ import { ManagementComponent } from './views/management/management.component';
     MatDialogModule,
     MatSelectModule,
     MatSliderModule,
+    MatCardModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
