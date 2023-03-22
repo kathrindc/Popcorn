@@ -26,6 +26,13 @@ import { ProfileComponent } from './views/profile/profile.component';
 import { OrdersComponent } from './views/orders/orders.component';
 import { ReviewsComponent, ReviewDialog } from './views/reviews/reviews.component';
 import { OrderDetailComponent } from './views/order-detail/order-detail.component';
+import { ManagementComponent } from './views/management/management.component';
+import {MoviesComponent} from "./views/management/movies/movies.component";
+import {TheatersComponent} from "./views/management/theaters/theaters.component";
+import {ScheduleComponent} from "./views/management/schedule/schedule.component";
+import {TicketsComponent} from "./views/management/tickets/tickets.component";
+import {MatCard, MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -36,11 +43,16 @@ import { OrderDetailComponent } from './views/order-detail/order-detail.componen
     SeatsComponent,
     CartComponent,
     LoginComponent,
+    ManagementComponent,
     ProfileComponent,
     OrdersComponent,
     ReviewsComponent,
     OrderDetailComponent,
-    ReviewDialog
+    ReviewDialog,
+    MoviesComponent,
+    TheatersComponent,
+    ScheduleComponent,
+    TicketsComponent
   ],
   imports: [
     CommonModule,
@@ -48,16 +60,13 @@ import { OrderDetailComponent } from './views/order-detail/order-detail.componen
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    
     JwtModule.forRoot({
       config: {
         tokenGetter: () => localStorage.getItem('auth'),
         allowedDomains: ['popcorn-api.toast.ws']
       }
     }),
-    
     FormsModule,
-    
     MatFormFieldModule,
     MatInputModule,
     MatToolbarModule,
@@ -65,6 +74,8 @@ import { OrderDetailComponent } from './views/order-detail/order-detail.componen
     MatDialogModule,
     MatSelectModule,
     MatSliderModule,
+    MatCardModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

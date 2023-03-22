@@ -10,6 +10,11 @@ import { OrdersComponent } from './views/orders/orders.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { ReviewsComponent } from './views/reviews/reviews.component';
 import { SeatsComponent } from './views/seats/seats.component';
+import {ManagementComponent} from "./views/management/management.component";
+import {MoviesComponent} from "./views/management/movies/movies.component";
+import {ScheduleComponent} from "./views/management/schedule/schedule.component";
+import {TicketsComponent} from "./views/management/tickets/tickets.component";
+import {TheatersComponent} from "./views/management/theaters/theaters.component";
 
 const routes: Routes = [
 
@@ -63,6 +68,31 @@ const routes: Routes = [
   path:'login',
   pathMatch: 'full',
   component: LoginComponent,
+},
+{
+  path:'management',
+  pathMatch: 'full',
+  component: ManagementComponent,
+},
+{
+  path:'management/theaters',
+  pathMatch: 'full',
+  component: TheatersComponent,
+},
+{
+  path:'management/movies',
+  pathMatch: 'full',
+  component: MoviesComponent,
+},
+{
+  path:'management/schedule',
+  pathMatch: 'full',
+  component: ScheduleComponent,
+},
+{
+  path:'management/tickets',
+  pathMatch: 'full',
+  component: TicketsComponent,
 }
 
 ];
