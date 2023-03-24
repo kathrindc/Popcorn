@@ -1,0 +1,56 @@
+<section *ngIf="hasRole(['manager', 'admin'])">
+  <ng-container *ngIf="rows != null">
+    <div class="theater">
+      <h3>---------------- Leinwand ----------------</h3>
+      <ng-container>
+        <table>
+          <tr *ngFor="let row of rows">
+            <td *ngFor="let seat of row">
+            <span
+              *ngIf="seat"
+              [class]="getSeatClass(seat)"
+              (click)="toggleSelect(seat)">
+                {{ seat.displayNum }}
+            </span>
+              <span
+                *ngIf="!seat"
+                class="seat-box"></span>
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="color-box gray"></div>
+        <span>Seat not available</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box accessible"></div>
+        <span>Seat accessible</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box deluxe"></div>
+        <span>Deluxe seat</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box normal"></div>
+        <span>Normal seat</span>
+      </div>
+    </div>
+
+    <ng-container *ngIf="selectedSeats.length > 0">
+      <ul>
+        <li *ngFor="let seat of selectedSeats">
+          Sitz {{ seat.displayNum }}: {{ getSeatPrice(seat) }} €
+        </li>
+      </ul>
+      <p>Gesamtpreis: <span><b>{{ getTotalPrice() }} €</b></span></p>
+      <button mat-raised-button color="primary" (click)="sellTickets($event)">
+        Sell Seats
+      </button>
+    </ng-container>
+  </ng-container>
+
+</section>

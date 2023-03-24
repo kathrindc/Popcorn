@@ -27,6 +27,7 @@ import { OrdersComponent } from './views/orders/orders.component';
 import { ReviewsComponent, ReviewDialog } from './views/reviews/reviews.component';
 import { OrderDetailComponent } from './views/order-detail/order-detail.component';
 import { ManagementComponent } from './views/management/management.component';
+import { TheaterViewComponent } from './views/management/theater-view/theater-view.component';
 import {MoviesComponent} from "./views/management/movies/movies.component";
 import {TheatersComponent} from "./views/management/theaters/theaters.component";
 import {ScheduleComponent} from "./views/management/schedule/schedule.component";
@@ -34,7 +35,9 @@ import {TicketsComponent} from "./views/management/tickets/tickets.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
 import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie/schedule-movie.component";
-import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -56,6 +59,7 @@ import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-b
     ScheduleComponent,
     ScheduleMovieComponent,
     TicketsComponent,
+    TheaterViewComponent,
   ],
   imports: [
     CommonModule,
@@ -80,8 +84,17 @@ import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-b
     MatCardModule,
     MatIconModule,
     MatProgressBarModule,
+    MatTooltipModule,
+    MatSnackBarModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
+      useValue: {
+        panelClass: ['success-snackbar']
+      } as MatSnackBarConfig
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

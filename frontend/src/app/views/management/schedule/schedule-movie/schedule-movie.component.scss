@@ -9,6 +9,24 @@ section:first-of-type {
     height: auto;
     background-color: lightgray;
     margin: 10px;
+
+    .showing {
+      display: flex;
+
+      .show-left {
+        width: 80%;
+      }
+
+      .show-right {
+        width: 20%;
+
+        > button {
+          margin: 5px;
+        }
+
+      }
+
+    }
   }
 
 }

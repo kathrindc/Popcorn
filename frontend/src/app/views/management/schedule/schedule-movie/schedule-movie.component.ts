@@ -57,5 +57,9 @@ export class ScheduleMovieComponent {
     return roles.includes(this.role);
   }
 
+  buyTickets(movieId: number, theaterId: number) {
+
+  }
+
 
 }

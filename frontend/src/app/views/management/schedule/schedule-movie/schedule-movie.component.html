@@ -6,12 +6,22 @@
   <section class="schedule-content" *ngIf="showings; else loadingMovies">
     <ng-container *ngIf="showings.length > 0; else noMovies">
       <ng-container *ngFor="let showing of showings">
-        <mat-card class="card showing">
-          <mat-card-content>
-            <p>Variante: {{ showing.variant }}</p>
-            <p>Startzeit: {{ showing.startsAt }}</p><!--TODO: | date: 'd. MMM y' -->
-            <p>Freie Plätze: {{ showing.freeSeats }}</p>
-            <p>Saal: {{ showing.theaterId }}</p>
+        <mat-card class="card">
+          <mat-card-content class="showing">
+            <div class="show-left">
+              <p>Variante: {{ showing.variant }}</p>
+              <p>Startzeit: {{ showing.startsAt }}</p><!--TODO: | date: 'd. MMM y' -->
+              <p>Freie Plätze: {{ showing.freeSeats }}</p>
+              <p>Saal: {{ showing.theaterId }}</p>
+            </div>
+            <div class="show-right">
+              <button *ngIf="hasRole(['admin'])" mat-fab color="warn" aria-label="Example icon button with a delete icon">
+                <mat-icon matTooltip="Delete Showing">delete</mat-icon><!--TODO: dialog to confirm to delete showing-->
+              </button>
+              <button [routerLink]="['/management/theaterview', showing.id, showing.theaterId]" mat-fab color="primary" aria-label="Example icon button with a bookmark icon">
+                <mat-icon matTooltip="Buy tickets">credit_card</mat-icon>
+              </button>
+            </div>
           </mat-card-content>
         </mat-card>
 
