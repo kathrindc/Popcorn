@@ -289,6 +289,8 @@ module.exports = (fastify, _, done) => {
 
             const order = await Order.add(request.user.id, cart.items);
 
+            await Cart.clear(request.user.id);
+
             reply
                 .code(201)
                 .header('Location', '/my/orders/' + order.id);
