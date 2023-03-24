@@ -1,7 +1,6 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
   <ng-container *ngIf="rows != null">
     <div class="theater">
-      <h3>---------------- Leinwand ----------------</h3>
       <ng-container>
         <table>
           <tr *ngFor="let row of rows">
@@ -19,6 +18,7 @@
           </tr>
         </table>
       </ng-container>
+      <h3>---------------- Leinwand ----------------</h3>
     </div>
 
     <div class="legend">
