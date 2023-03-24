@@ -91,7 +91,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} fro
     {
       provide: MAT_SNACK_BAR_DEFAULT_OPTIONS,
       useValue: {
-        panelClass: ['success-snackbar']
+        panelClass: ['success-snackbar'],
+        duration: 3000,
       } as MatSnackBarConfig
     }
   ],

@@ -88,7 +88,7 @@ export class TheaterViewComponent implements OnInit {
       this.selSeatNumbs[i]=this.selectedSeats[i].displayNum
     }
 
-    if(await this.seatService.tryAddCart(this.show!.theaterId, this.selSeatNumbs)) {
+    if(await this.seatService.tryAddCart(this.show!.id, this.selSeatNumbs)) {
       if (await this.seatService.tryPurchase()) {
         this.router.navigate(['/management'])
           .then(() => this.snackBar.open('Seats sold successfully!', 'OK',

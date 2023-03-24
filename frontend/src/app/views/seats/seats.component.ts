@@ -74,7 +74,7 @@ export class SeatsComponent implements OnInit {
       this.selSeatNumbs[i]=this.selectedSeats[i].displayNum
     }
 
-    if(await this.seatService.tryAddCart(this.show?.theaterId, this.selSeatNumbs)){
+    if(await this.seatService.tryAddCart(this.show?.id, this.selSeatNumbs)){
       this.router.navigate(['/cart'])
         .then(_r => console.log('seats successfully added to cart'));
     }
