@@ -4,13 +4,11 @@ section:first-of-type {
   width: auto;
 
   .card {
-    cursor: pointer;
-    max-width: 400px;
-    height: 150px;
+    //cursor: pointer;
+    width: auto;
+    height: auto;
     background-color: lightgray;
     margin: 10px;
   }
 
 }
-
-

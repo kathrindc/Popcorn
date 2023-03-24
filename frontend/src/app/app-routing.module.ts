@@ -15,6 +15,7 @@ import {MoviesComponent} from "./views/management/movies/movies.component";
 import {ScheduleComponent} from "./views/management/schedule/schedule.component";
 import {TicketsComponent} from "./views/management/tickets/tickets.component";
 import {TheatersComponent} from "./views/management/theaters/theaters.component";
+import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie/schedule-movie.component";
 
 const routes: Routes = [
 
@@ -85,9 +86,14 @@ const routes: Routes = [
   component: MoviesComponent,
 },
 {
-  path:'management/schedule',
+  path:'management/schedule/',
   pathMatch: 'full',
   component: ScheduleComponent,
+},
+{
+  path:'management/schedule/:movie_id',
+  pathMatch: 'full',
+  component: ScheduleMovieComponent,
 },
 {
   path:'management/tickets',

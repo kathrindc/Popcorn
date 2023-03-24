@@ -31,8 +31,10 @@ import {MoviesComponent} from "./views/management/movies/movies.component";
 import {TheatersComponent} from "./views/management/theaters/theaters.component";
 import {ScheduleComponent} from "./views/management/schedule/schedule.component";
 import {TicketsComponent} from "./views/management/tickets/tickets.component";
-import {MatCard, MatCardModule} from "@angular/material/card";
+import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie/schedule-movie.component";
+import {MatProgressBar, MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -52,7 +54,8 @@ import {MatIconModule} from "@angular/material/icon";
     MoviesComponent,
     TheatersComponent,
     ScheduleComponent,
-    TicketsComponent
+    ScheduleMovieComponent,
+    TicketsComponent,
   ],
   imports: [
     CommonModule,
@@ -76,6 +79,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatSliderModule,
     MatCardModule,
     MatIconModule,
+    MatProgressBarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

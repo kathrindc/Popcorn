@@ -1,4 +1,19 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
-  Movies works
+  <ng-container *ngIf="movies">
+    <div *ngFor="let movie of movies.records">
+      <mat-card [routerLink]="['/management/schedule', movie.id]" class="card tickets">
+        <mat-card-header>
+          <mat-card-title>{{ movie.name }}</mat-card-title>
+          <mat-icon mat-card-avatar>movie</mat-icon>
+        </mat-card-header>
+        <mat-card-content>
+          <p>Minimum Age: {{ movie.minimumAge }}</p>
+          <p>Released: {{ movie.releasedAt }}</p><!--TODO: | date: 'd. MMM y' -->
+        </mat-card-content>
+<!--        TODO: load image of Movie into mat-card-->
+      </mat-card>
+
+    </div>
+  </ng-container>
 
 </section>

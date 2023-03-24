@@ -1,5 +1,7 @@
-.section {
-  margin: 20px 200px;
+.section:first-of-type {
+  margin: 20px auto;
+  max-width: 1000px;
+  width: auto;
 
   .card {
     cursor: pointer;

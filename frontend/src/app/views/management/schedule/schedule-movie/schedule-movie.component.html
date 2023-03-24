@@ -1,0 +1,37 @@
+<section *ngIf="hasRole(['manager', 'admin'])">
+  <section *ngIf="movie">
+    <h1>{{ movie.name }}</h1>
+    <h3>Schedule:</h3>
+  </section>
+  <section class="schedule-content" *ngIf="showings; else loadingMovies">
+    <ng-container *ngIf="showings.length > 0; else noMovies">
+      <ng-container *ngFor="let showing of showings">
+        <mat-card class="card showing">
+          <mat-card-content>
+            <p>Variante: {{ showing.variant }}</p>
+            <p>Startzeit: {{ showing.startsAt }}</p><!--TODO: | date: 'd. MMM y' -->
+            <p>Freie Plätze: {{ showing.freeSeats }}</p>
+            <p>Saal: {{ showing.theaterId }}</p>
+          </mat-card-content>
+        </mat-card>
+
+      </ng-container>
+
+    </ng-container>
+
+  </section>
+
+  <ng-template #noMovies>
+    <mat-card class="card showing">
+      <mat-card-content>
+        <p>Keine Aufführungen in Zukunft geplant...</p>
+      </mat-card-content>
+    </mat-card>
+
+  </ng-template>
+
+  <ng-template #loadingMovies>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </ng-template>
+
+</section>
