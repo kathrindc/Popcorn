@@ -3,6 +3,20 @@ section:first-of-type {
   max-width: 1000px;
   width: auto;
 
+  .header {
+    display: flex;
+    flex-direction: row;
+
+    .left {
+      vertical-align: middle;
+      margin-right: 10px; /* adjust as needed */
+    }
+
+    .right {
+      vertical-align: middle;
+    }
+  }
+
   .theater {
     display: flex;
     flex-direction: column;

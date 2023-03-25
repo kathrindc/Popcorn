@@ -1,14 +1,32 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
+  <section class="header-movies">
+    <h1>Movies:</h1>
+    <button *ngIf="hasRole(['admin'])" mat-mini-fab color="primary" (click)="createMovie()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </section>
+
   <ng-container *ngIf="movies">
     <div *ngFor="let movie of movies.records">
-      <mat-card [routerLink]="['/management/schedule', movie.id]" class="card tickets">
+      <mat-card [routerLink]="['/management/schedule', movie.id]" class="card">
         <mat-card-header>
           <mat-card-title>{{ movie.name }}</mat-card-title>
           <mat-icon mat-card-avatar>movie</mat-icon>
         </mat-card-header>
-        <mat-card-content>
-          <p>Minimum Age: {{ movie.minimumAge }}</p>
-          <p>Released: {{ movie.releasedAt }}</p><!--TODO: | date: 'd. MMM y' -->
+        <mat-card-content class="movies">
+          <div class="movie-left">
+            <p>Minimum Age: {{ movie.minimumAge }}</p>
+            <p>Released: {{ movie.releasedAt }}</p><!--TODO: | date: 'd. MMM y' -->
+          </div>
+          <div class="movie-right">
+            <button mat-icon-button color="primary" (click)="editMovie(movie.id, $event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="hasRole(['admin'])" mat-icon-button color="warn" (click)="openDialog(movie.id, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
         </mat-card-content>
 <!--        TODO: load image of Movie into mat-card-->
       </mat-card>

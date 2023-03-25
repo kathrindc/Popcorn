@@ -1,7 +1,13 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
-  <section *ngIf="movie">
+  <section class="header">
+    <button mat-icon-button (click)="back()" class="left">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="right">Schedule:</h1>
+  </section>
+
+  <section *ngIf="movie" class="">
     <h1>{{ movie.name }}</h1>
-    <h3>Schedule:</h3>
   </section>
   <section class="schedule-content" *ngIf="showings; else loadingMovies">
     <ng-container *ngIf="showings.length > 0; else noMovies">

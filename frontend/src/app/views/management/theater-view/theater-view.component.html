@@ -1,4 +1,12 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
+
+  <section class="header">
+    <button mat-icon-button (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="right">Sell Seats:</h1>
+  </section>
+
   <ng-container *ngIf="rows != null">
     <div class="theater">
       <ng-container>

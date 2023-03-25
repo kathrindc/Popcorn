@@ -20,7 +20,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SeatsComponent } from './views/seats/seats.component';
 import { CartComponent } from './views/cart/cart.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { LoginComponent } from './views/login/login.component';
 import { ProfileComponent } from './views/profile/profile.component';
 import { OrdersComponent } from './views/orders/orders.component';
@@ -38,6 +38,10 @@ import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} from "@angular/material/snack-bar";
+import {MoviesCreateComponent} from "./views/management/movies/movies-create/movies-create.component";
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+import {ConfirmDialogComponent} from "./views/management/dialogs/confirm-dialog.component";
 
 @NgModule({
   declarations: [
@@ -60,6 +64,8 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} fro
     ScheduleMovieComponent,
     TicketsComponent,
     TheaterViewComponent,
+    MoviesCreateComponent,
+    ConfirmDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -86,6 +92,11 @@ import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarConfig, MatSnackBarModule} fro
     MatProgressBarModule,
     MatTooltipModule,
     MatSnackBarModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     {

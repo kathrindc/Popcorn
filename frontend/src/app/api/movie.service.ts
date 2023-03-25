@@ -20,7 +20,7 @@ import MovieMini from '../data/movieMini';
 export class MovieService {
 
   private ApiUrl = "https://popcorn-api.toast.ws/"
-  
+
 
   constructor(
     public httpClient: HttpClient
@@ -39,6 +39,20 @@ export class MovieService {
     return this.httpClient.get(`${this.ApiUrl}movies/${encodeURIComponent(id)}`, {
       responseType: 'json',
     }) as Observable<MovieDetail>;
+  }
+
+  createMovie(formData: FormData): Observable<MovieDetail>{
+    return this.httpClient.post<MovieDetail>(`${this.ApiUrl}movies`, formData);
+  }
+
+  updateMovie(id: string, formData: FormData): Observable<MovieDetail>{
+    return this.httpClient.put<MovieDetail>(`${this.ApiUrl}movies/${id}`, formData);
+  }
+
+  deleteMovie(id: string): Observable<boolean>{
+    return this.httpClient.delete<boolean>(`${this.ApiUrl}movies/${id}`, {
+      responseType: 'json',
+    });
   }
 
   getShowings(id: string, date: Date): Observable<Page<Showing>>{
@@ -76,7 +90,7 @@ export class MovieService {
     {responseType: 'json',
   }) as Observable<Account>
   }
-  
+
   getReviews(): Observable<List<Review>>{
     return this.httpClient.get(`${this.ApiUrl}my/ratings`,
     {responseType: 'json',

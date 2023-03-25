@@ -6,6 +6,7 @@ import Seat from 'src/app/data/seat';
 import Show from 'src/app/data/show';
 import {AuthService} from "../../../auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-management',
@@ -28,6 +29,7 @@ export class TheaterViewComponent implements OnInit {
     public router: Router,
     private authService: AuthService,
     private snackBar: MatSnackBar,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -172,5 +174,9 @@ export class TheaterViewComponent implements OnInit {
 
   hasRole(roles: string[]): boolean {
     return roles.includes(this.role);
+  }
+
+  back() {
+    this.location.back();
   }
 }

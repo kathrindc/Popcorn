@@ -4,6 +4,7 @@ import MovieDetail from "../../../../data/movieDetail";
 import Showing from "../../../../data/showing";
 import {MovieService} from "../../../../api/movie.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-management',
@@ -21,7 +22,8 @@ export class ScheduleMovieComponent {
     public movieService: MovieService,
     public route: ActivatedRoute,
     public router: Router,
-    public authService: AuthService
+    public authService: AuthService,
+    private location: Location,
   ) {
   }
 
@@ -59,6 +61,10 @@ export class ScheduleMovieComponent {
 
   buyTickets(movieId: number, theaterId: number) {
 
+  }
+
+  back() {
+    this.location.back();
   }
 
 
