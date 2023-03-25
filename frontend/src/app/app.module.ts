@@ -33,6 +33,7 @@ import {ScheduleComponent} from "./views/management/schedule/schedule.component"
 import {TicketsComponent} from "./views/management/tickets/tickets.component";
 import {MatCard, MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import { QRCodeModule } from 'angularx-qrcode';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import {MatIconModule} from "@angular/material/icon";
     MatSliderModule,
     MatCardModule,
     MatIconModule,
+    QRCodeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
