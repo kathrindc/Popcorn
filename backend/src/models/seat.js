@@ -37,7 +37,7 @@ async function getByShow(showId, theaterId) {
 
 async function getById(theaterId, seatId) {
     const res = await pool.query(
-        'SELECT * FROM seats WHERE theaterId = $1 AND id = $2',
+        'SELECT * FROM seats WHERE "theaterId" = $1 AND "id" = $2',
         [theaterId, seatId]
     );
 
@@ -46,7 +46,7 @@ async function getById(theaterId, seatId) {
 
 async function _doAdd(connection, displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId) {
     const res = await connection.query(
-        'INSERT INTO seats (displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+        'INSERT INTO seats ("displayNum", "displayX", "displayY", "flagDeluxe", "flagWheelchair", "theaterId") VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
         [displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId]
     );
 
@@ -87,7 +87,7 @@ async function batchAdd(seats, theaterId) {
 
 async function update(theaterId, seat) {
     const res = await pool.query(
-        'UPDATE seats SET displayNum = $3, displayX = $4, displayY = $5, flagDeluxe = $6, flagWheelchair = $7 WHERE theaterId = $1 AND id = $2',
+        'UPDATE seats SET "displayNum" = $3, "displayX" = $4, "displayY" = $5, "flagDeluxe" = $6, "flagWheelchair" = $7 WHERE "theaterId" = $1 AND "id" = $2',
         [theaterId, seat.id, seat.displayNum, seat.displayX, seat.displayY, seat.flagDeluxe, seat.flagWheelchair]
     );
 
@@ -96,7 +96,7 @@ async function update(theaterId, seat) {
 
 async function remove(theaterId, seatId) {
     const res = await pool.query(
-        'DELETE FROM seats WHERE theaterId = $1 AND id = $2 RETURNING *',
+        'DELETE FROM seats WHERE "theaterId" = $1 AND "id" = $2 RETURNING *',
         [theaterId, seatId]
     );
 
