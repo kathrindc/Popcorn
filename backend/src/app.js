@@ -24,7 +24,7 @@ fastify.start = async function (port) {
             });
 
             await fastify.register(require('@fastify/cors'), {
-                origin: process.env.CORS_ORIGIN || process.env.FRONTEND_URL,
+                origin: process.env.CORS_ORIGIN?.split?.(',') || process.env.FRONTEND_URL,
             });
 
             await fastify.register(require('@fastify/rate-limit'), {
@@ -200,6 +200,8 @@ fastify.start = async function (port) {
                 properties: {
                     showId: { type: 'string', minLength: 1 },
                     seatId: { type: 'string', minLength: 1 },
+                    movieId: { type: 'string', minLength: 1 },
+                    movieName: { type: 'string', minLength: 1 },
                 },
             });
 
@@ -237,6 +239,7 @@ fastify.start = async function (port) {
                     id: { type: 'string' },
                     userId: { type: 'string' },
                     movieId: { type: 'string' },
+                    movieName: { type: 'string' },
                     stars: { type: 'integer', minimum: 1, maximum: 5 },
                     content: { type: 'string' },
                 },

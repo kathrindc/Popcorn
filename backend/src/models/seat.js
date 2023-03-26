@@ -11,12 +11,28 @@ async function getByTheater(theaterId) {
 }
 
 async function getByShow(showId, theaterId) {
-    const res = await pool.query(
+    const ticketsResult = await pool.query(
         `SELECT *, ((SELECT COUNT(*) FROM tickets t WHERE t."showId" = $1 AND t."seatId" = s."id") < 1) as "isFree" FROM seats s WHERE s."theaterId" = $2`,
         [showId, theaterId]
     );
+    const lockPrefix = `lock.${showId}.`;
+    const bounced = {}; 
 
-    return res.rows;
+    for await (let key of redis.scanIterator({ pattern: `${lockPrefix}*` })) {
+        const sub = key.replace(lockPrefix, '');
+
+        if (!isNaN(sub)) {
+            bounced[parseInt(sub)] = true;
+        }
+    }
+
+    for (let i = 0; i < ticketsResult.rows.length; ++i) {
+        if (bounced[ticketsResult.rows[i].id]) {
+            ticketsResult.rows[i].isFree = false;
+        }
+    }
+
+    return ticketsResult.rows;
 }
 
 async function getById(theaterId, seatId) {

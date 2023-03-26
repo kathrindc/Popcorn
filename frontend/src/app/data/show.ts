@@ -1,9 +1,9 @@
 import Seat from "./seat";
 
 export default interface Show{
-    id: number,
+    id: string,
     variant: string[],
-    startsAt: Date,
+    startsAt: string,
     movieId: string,
     theaterId: string,
     seats: Seat[],

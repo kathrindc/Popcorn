@@ -15,6 +15,12 @@ import {MoviesComponent} from "./views/management/movies/movies.component";
 import {ScheduleComponent} from "./views/management/schedule/schedule.component";
 import {TicketsComponent} from "./views/management/tickets/tickets.component";
 import {TheatersComponent} from "./views/management/theaters/theaters.component";
+import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie/schedule-movie.component";
+import {TheaterViewComponent} from "./views/management/theater-view/theater-view.component";
+import {MoviesCreateComponent} from "./views/management/movies/movies-create/movies-create.component";
+import {ShowingCreateComponent} from "./views/management/schedule/schedule-movie/showing-create/showing-create.component";
+import {TheatersCreateComponent} from "./views/management/theaters/theaters-create/theaters-create.component";
+import {SeatsCreateComponent} from "./views/management/theaters/theaters-create/seats-create/seats-create.component";
 
 const routes: Routes = [
 
@@ -73,27 +79,74 @@ const routes: Routes = [
   path:'management',
   pathMatch: 'full',
   component: ManagementComponent,
+  canActivate: [AuthGuard]
 },
 {
   path:'management/theaters',
   pathMatch: 'full',
   component: TheatersComponent,
+  canActivate: [AuthGuard]
 },
 {
   path:'management/movies',
   pathMatch: 'full',
   component: MoviesComponent,
+  canActivate: [AuthGuard]
 },
 {
-  path:'management/schedule',
+  path:'management/movies/create',
+  pathMatch: 'full',
+  component: MoviesCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/movies/update/:id',
+  pathMatch: 'full',
+  component: MoviesCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/schedule/',
   pathMatch: 'full',
   component: ScheduleComponent,
+  canActivate: [AuthGuard]
 },
 {
-  path:'management/tickets',
+  path:'management/schedule/:movie_id',
   pathMatch: 'full',
-  component: TicketsComponent,
-}
+  component: ScheduleMovieComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/showing/create/:movieId',
+  pathMatch: 'full',
+  component: ShowingCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaterview/:showId/:theaterId',
+  pathMatch: 'full',
+  component: TheaterViewComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaters/create',
+  pathMatch: 'full',
+  component: TheatersCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaters/:id/update',
+  pathMatch: 'full',
+  component: TheatersCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaters/:theaterId/seats',
+  pathMatch: 'full',
+  component: SeatsCreateComponent,
+  canActivate: [AuthGuard]
+},
 
 ];
 

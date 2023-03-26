@@ -1,0 +1,54 @@
+section:first-of-type {
+  margin: 20px auto;
+  max-width: 1000px;
+  width: auto;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+
+    .left {
+      vertical-align: middle;
+      margin-right: 20px; /* adjust as needed */
+    }
+
+    .right {
+      vertical-align: middle;
+    }
+  }
+
+  .seats-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .form-field {
+    width: 100%;
+  }
+
+  .form-input {
+
+  }
+
+  .selected-chip {
+    background-color: #007bff; /* set the background color */
+    color: #fff; /* set the text color */
+  }
+
+  .chip-list {
+    margin-bottom: 10px;
+  }
+
+  .mat-chip {
+    margin-right: 5px;
+  }
+
+}
+
+

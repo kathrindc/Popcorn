@@ -5,7 +5,7 @@ async function getPage(page, size) {
         'SELECT COUNT(*) as num FROM ratings'
     )).rows[0].num);
     const res = await pool.query(
-        'SELECT "id", "movieId", "userId", "stars", "content" FROM ratings OFFSET $1 LIMIT $2',
+        'SELECT r0."id" as "id", r0."movieId" as "movieId", m0."name" as "movieName", r0."userId" as "userId", r0."stars" as "stars", r0."content" as "content" FROM ratings r0 LEFT JOIN movies m0 ON r0."movieId" = m0."id" OFFSET $1 LIMIT $2',
         [(page - 1) * size, size]
     );
 
@@ -19,11 +19,11 @@ async function getPage(page, size) {
 
 async function getPageByUser(page, size, userId) {
     const total = +((await pool.query(
-        'SELECT COUNT(*) as num FROM ratings WHERE userId = $1',
+        'SELECT COUNT(*) as "num" FROM ratings WHERE "userId" = $1',
         [userId]
     )).rows[0].num);
     const res = await pool.query(
-        'SELECT "id", "movieId", "userId", "stars", "content" FROM ratings WHERE "userId" = $3 OFFSET $1 LIMIT $2',
+        'SELECT r0."id" as "id", r0."movieId" as "movieId", m0."name" as "movieName", r0."userId" as "userId", r0."stars" as "stars", r0."content" as "content" FROM ratings r0 LEFT JOIN movies m0 ON r0."movieId" = m0."id" WHERE r0."userId" = $3 OFFSET $1 LIMIT $2',
         [(page - 1) * size, size, userId]
     );
 

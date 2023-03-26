@@ -1,4 +1,40 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
-  Theaters work
+  <section class="header-theater">
+    <button mat-icon-button (click)="back()" class="left">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="right">Theaters:</h1>
+    <button *ngIf="hasRole(['admin'])" mat-mini-fab color="primary" (click)="createTheater()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </section>
+
+  <ng-container *ngIf="theaters">
+    <div *ngFor="let theater of theaters.records">
+      <mat-card [routerLink]="['/management/theaters', theater.id , 'seats']" class="card">
+        <mat-card-header>
+          <mat-card-title>{{ theater.name }}</mat-card-title>
+          <mat-icon mat-card-avatar>tv</mat-icon>
+        </mat-card-header>
+        <mat-card-content class="theater">
+          <div class="theater-left">
+            <p>ID: {{ theater.id }} </p>
+            <p>Saal: {{ theater.name }} </p>
+            <p>Features: {{ getFeatures(theater.features) }}</p>
+          </div>
+          <div class="theater-right">
+            <button mat-icon-button color="primary" (click)="editTheater(theater.id, $event)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button *ngIf="hasRole(['admin'])" mat-icon-button color="warn" (click)="openDialog(theater.id, $event)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+  </ng-container>
 
 </section>
