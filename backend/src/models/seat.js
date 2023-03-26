@@ -44,13 +44,45 @@ async function getById(theaterId, seatId) {
     return res.rowCount == 1 ? res.rows : null;
 }
 
-async function add(displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId) {
-    const res = await pool.query(
+async function _doAdd(connection, displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId) {
+    const res = await connection.query(
         'INSERT INTO seats (displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
         [displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId]
     );
 
     return res.rows[0];
+}
+
+async function add(displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId) {
+    return _doAdd(pool, displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId);
+}
+
+async function batchAdd(seats, theaterId) {
+    const client = await pool.connect();
+    const results = [];
+
+    try {
+        await client.query('BEGIN');
+
+        for (let seat of seats) {
+            const result = await _doAdd(
+                client,
+                seat.displayNum,
+                seat.displayX,
+                seat.displayY,
+                seat.flagDeluxe,
+                seat.flagWheelchair,
+                theaterId
+            );
+
+            results.push(result);
+        }
+    } catch (e) {
+        await client.query('ROLLBACK');
+        throw e;
+    } finally {
+        client.release();
+    }
 }
 
 async function update(theaterId, seat) {
@@ -95,4 +127,4 @@ async function isFree(showId, theaterId, seatId) {
     );
 }
 
-module.exports = { getByTheater, getByShow, getById, isFree, add, update, remove };
+module.exports = { getByTheater, getByShow, getById, isFree, add, batchAdd, update, remove };
