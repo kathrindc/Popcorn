@@ -6,8 +6,89 @@
     <h1 class="right">{{ update ? 'Update Seats:' : 'Create Seats:' }}</h1>
   </section>
   <div>
+    <div class="theater">
+      <ng-container *ngIf="update; else create">
+        <div class="seats-form">
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Reihen" [(ngModel)]="rowNumbs" (ngModelChange)="newSeating()">
+          </mat-form-field>
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Sitze" [(ngModel)]="seatNumbs" (ngModelChange)="newSeating()">
+          </mat-form-field>
+        </div>
 
+        <table *ngIf="seatsCreateNew">
+          <tr *ngFor="let row of seatsCreateNew">
+            <td *ngFor="let seat of row">
+            <span
+              *ngIf="seat"
+              [class]="getSeatClassNew(seat)"
+              (click)="toggleSelectNew(seat)">
+                <!--{{ seat.displayNum }}-->
+            </span>
+              <span
+                *ngIf="!seat"
+                class="seat-box"></span>
+            </td>
+          </tr>
+        </table>
+      </ng-container>
+
+      <ng-template #create>
+        <div class="seats-form">
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Reihen" [(ngModel)]="rowNumbs" (ngModelChange)="newSeating()">
+          </mat-form-field>
+          <mat-form-field class="input-field">
+            <input matInput placeholder="Sitze" [(ngModel)]="seatNumbs" (ngModelChange)="newSeating()">
+          </mat-form-field>
+        </div>
+
+        <table *ngIf="seatsCreateNew">
+          <tr *ngFor="let row of seatsCreateNew">
+            <td *ngFor="let seat of row">
+            <span
+              *ngIf="seat"
+              [class]="getSeatClassNew(seat)"
+              (click)="toggleSelectNew(seat)">
+                <!--{{ seat.displayNum }}-->
+            </span>
+              <span
+                *ngIf="!seat"
+                class="seat-box"></span>
+            </td>
+          </tr>
+        </table>
+      </ng-template>
+
+      <h3>---------------- Leinwand ----------------</h3>
+      <button mat-raised-button color="primary" (click)="createSeats()">
+        {{ update ? 'Update Seats' : 'Create Seats' }}
+      </button>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item">
+        <div class="color-box normal"></div>
+        <span>Normal seat</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box deluxe"></div>
+        <span>Deluxe Seat</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box accessible"></div>
+        <span>Wheelchair Seat</span>
+      </div>
+      <div class="legend-item">
+        <div class="color-box gray"></div>
+        <span>No Seat</span>
+      </div>
+
+    </div>
 
   </div>
+
+
 
 </section>

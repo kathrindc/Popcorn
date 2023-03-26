@@ -17,6 +17,8 @@ import {Theaters} from "../data/theaters";
 import {Theater} from "../data/theater";
 import ShowingCreate from "../data/showingCreate";
 import {TheaterCreate} from "../data/theater-create";
+import SeatCreate from "../data/seatCreate";
+import SeatDetails from "../data/seatDetails";
 
 @Injectable({
   providedIn: 'root'
@@ -126,12 +128,23 @@ export class MovieService {
   }
 
   createTheater(data: TheaterCreate): Observable<Theater> {
-    console.log(data);
     return this.httpClient.post<Theater>(`${this.ApiUrl}theaters`, data);
   }
 
   updateTheater(data: Theater): Observable<Theater>{
     return this.httpClient.put<Theater>(`${this.ApiUrl}theaters`, data);
+  }
+
+  createSeat(theaterId: string, data: SeatCreate): Observable<SeatDetails> {
+    return this.httpClient.post<SeatDetails>(`${this.ApiUrl}theaters/${theaterId}/seats`, data);
+  }
+
+  deleteSeat(theaterId: string, seatId: string): Observable<boolean> {
+    return this.httpClient.delete<boolean>(`${this.ApiUrl}theaters/${theaterId}/seats/${seatId}`);
+  }
+
+  getSeats(theaterId: string): Observable<SeatDetails[]> {
+    return this.httpClient.get<SeatDetails[]>(`${this.ApiUrl}theaters/${theaterId}/seats`);
   }
 
   createShowing(data: ShowingCreate): Observable<Showing> {

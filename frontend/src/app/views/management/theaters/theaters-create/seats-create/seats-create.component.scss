@@ -19,21 +19,85 @@ section:first-of-type {
 
   .seats-form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     gap: 1rem;
   }
 
-  .form-group {
-    width: 100%;
+  .theater {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
   }
 
-  .form-field {
-    width: 100%;
+  .seat-box {
+    display: flex;
+    width: 4rem;
+    height: 4rem;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    cursor: pointer;
   }
 
-  .form-input {
+  .seat-box.inactive {
+    color: gray;
+    background: lightgray;
+  }
 
+  .seat-box.accessible {
+    background: #61affe;
+  }
+
+  .seat-box.deluxe {
+    background: #fca130;
+  }
+
+  .seat-box.active {
+    background: #49cc90;
+  }
+
+  .legend {
+    align-items: center;
+    margin: 1rem;
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+
+      .color-box {
+        width: 1rem;
+        height: 1rem;
+        margin-right: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 2px;
+
+        &.gray {
+          background-color: gray;
+        }
+
+        &.accessible {
+          background-color: #61affe;
+        }
+
+        &.deluxe {
+          background-color: #fca130;
+        }
+
+        &.normal {
+          background-color: #49cc90;
+        }
+      }
+
+      span {
+        font-size: 0.8rem;
+      }
+    }
   }
 
 
