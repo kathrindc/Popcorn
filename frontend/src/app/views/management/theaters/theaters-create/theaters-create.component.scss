@@ -29,11 +29,24 @@ section:first-of-type {
   }
 
   .form-field {
-    width: 30%;
+    width: 100%;
   }
 
-  .days-of-week {
-    background-color: #4a4a4a;
+  .form-input {
+
+  }
+
+  .selected-chip {
+    background-color: #007bff; /* set the background color */
+    color: #fff; /* set the text color */
+  }
+
+  .chip-list {
+    margin-bottom: 10px;
+  }
+
+  .mat-chip {
+    margin-right: 5px;
   }
 
 }

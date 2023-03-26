@@ -80,7 +80,7 @@ export class MoviesComponent {
         window.location.reload();
       },
       error: (err) => {
-        this.snackBar.open('An error occurred while creating the movie', 'Close', {
+        this.snackBar.open('An error occurred while deleting the movie', 'Close', {
           duration: 3000,
           panelClass: 'error-snackbar'
         });

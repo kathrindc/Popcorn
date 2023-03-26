@@ -44,6 +44,10 @@ import {MatNativeDateModule} from "@angular/material/core";
 import {ConfirmDialogComponent} from "./views/management/dialogs/confirm-dialog.component";
 import {ShowingCreateComponent} from "./views/management/schedule/schedule-movie/showing-create/showing-create.component";
 import {MatCheckboxModule} from "@angular/material/checkbox";
+import {TheatersCreateComponent} from "./views/management/theaters/theaters-create/theaters-create.component";
+import {MatChipsModule} from "@angular/material/chips";
+import {MatListModule} from "@angular/material/list";
+import {SeatsCreateComponent} from "./views/management/theaters/theaters-create/seats-create/seats-create.component";
 
 @NgModule({
   declarations: [
@@ -69,6 +73,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MoviesCreateComponent,
     ConfirmDialogComponent,
     ShowingCreateComponent,
+    TheatersCreateComponent,
+    SeatsCreateComponent,
   ],
   imports: [
     CommonModule,
@@ -101,6 +107,8 @@ import {MatCheckboxModule} from "@angular/material/checkbox";
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    MatChipsModule,
+    MatListModule,
   ],
   providers: [
     {

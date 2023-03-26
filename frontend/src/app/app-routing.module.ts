@@ -19,6 +19,8 @@ import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie
 import {TheaterViewComponent} from "./views/management/theater-view/theater-view.component";
 import {MoviesCreateComponent} from "./views/management/movies/movies-create/movies-create.component";
 import {ShowingCreateComponent} from "./views/management/schedule/schedule-movie/showing-create/showing-create.component";
+import {TheatersCreateComponent} from "./views/management/theaters/theaters-create/theaters-create.component";
+import {SeatsCreateComponent} from "./views/management/theaters/theaters-create/seats-create/seats-create.component";
 
 const routes: Routes = [
 
@@ -125,6 +127,24 @@ const routes: Routes = [
   path:'management/theaterview/:showId/:theaterId',
   pathMatch: 'full',
   component: TheaterViewComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaters/create',
+  pathMatch: 'full',
+  component: TheatersCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaters/:id/update',
+  pathMatch: 'full',
+  component: TheatersCreateComponent,
+  canActivate: [AuthGuard]
+},
+{
+  path:'management/theaters/:theaterId/seats',
+  pathMatch: 'full',
+  component: SeatsCreateComponent,
   canActivate: [AuthGuard]
 },
 

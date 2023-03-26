@@ -49,7 +49,7 @@ export class TheatersComponent {
 
   editTheater(id: string, event: MouseEvent) {
     event.stopPropagation();
-    // this.router.navigate(['management/movies/update/' + id]);
+    this.router.navigate(['management/theaters/', id, 'update']);
 
   }
 
@@ -70,27 +70,26 @@ export class TheatersComponent {
   }
 
   deleteTheater(id: string) {
-    //TODO: deleteTheater
-/*    this.movieService.deleteMovie(id).subscribe({
+    this.movieService.deleteTheater(id).subscribe({
       next: (success) => {
-        this.snackBar.open('Movie deleted successfully!', 'Close', {
+        this.snackBar.open('Theater deleted successfully!', 'Close', {
           duration: 3000,
           panelClass: 'success-snackbar'
         });
         window.location.reload();
       },
       error: (err) => {
-        this.snackBar.open('An error occurred while creating the movie', 'Close', {
+        this.snackBar.open('An error occurred while deleting the theater', 'Close', {
           duration: 3000,
           panelClass: 'error-snackbar'
         });
       }
-    });*/
+    });
 
   }
 
   createTheater() {
-    // this.router.navigate(['/management/movies/create']);
+    this.router.navigate(['/management/theaters/create']);
   }
 
   back() {

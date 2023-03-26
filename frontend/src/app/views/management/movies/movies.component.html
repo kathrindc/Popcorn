@@ -1,6 +1,9 @@
 <section *ngIf="hasRole(['manager', 'admin'])">
-  <section class="header-movies">
-    <h1>Movies:</h1>
+  <section class="header-theater">
+    <button mat-icon-button (click)="back()" class="left">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="right">Movies:</h1>
     <button *ngIf="hasRole(['admin'])" mat-mini-fab color="primary" (click)="createMovie()">
       <mat-icon>add</mat-icon>
     </button>
@@ -13,12 +16,12 @@
           <mat-card-title>{{ movie.name }}</mat-card-title>
           <mat-icon mat-card-avatar>movie</mat-icon>
         </mat-card-header>
-        <mat-card-content class="movies">
-          <div class="movie-left">
+        <mat-card-content class="theater">
+          <div class="theater-left">
             <p>Minimum Age: {{ movie.minimumAge }}</p>
-            <p>Released: {{ movie.releasedAt }}</p><!--TODO: | date: 'd. MMM y' -->
+            <p>Released: {{ movie.releasedAt }}</p>
           </div>
-          <div class="movie-right">
+          <div class="theater-right">
             <button mat-icon-button color="primary" (click)="editMovie(movie.id, $event)">
               <mat-icon>edit</mat-icon>
             </button>

@@ -1,0 +1,13 @@
+<section *ngIf="hasRole(['manager', 'admin'])">
+  <section class="header">
+    <button mat-icon-button (click)="back()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1 class="right">{{ update ? 'Update Seats:' : 'Create Seats:' }}</h1>
+  </section>
+  <div>
+
+
+  </div>
+
+</section>

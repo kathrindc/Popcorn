@@ -11,7 +11,7 @@
 
   <ng-container *ngIf="theaters">
     <div *ngFor="let theater of theaters.records">
-      <mat-card [routerLink]="['/management/theater', theater.id]" class="card">
+      <mat-card [routerLink]="['/management/theaters', theater.id , 'seats']" class="card">
         <mat-card-header>
           <mat-card-title>{{ theater.name }}</mat-card-title>
           <mat-icon mat-card-avatar>tv</mat-icon>

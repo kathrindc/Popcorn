@@ -7,7 +7,7 @@
   </section>
 
   <ng-container *ngIf="theaters">
-    <form [formGroup]="showingForm" (ngSubmit)="onSubmit()" class="movie-form">
+    <form [formGroup]="showingForm" (ngSubmit)="onSubmit()" class="seats-form">
       <mat-form-field class="form-field">
         <mat-label>Select Theater:</mat-label>
         <mat-select formControlName="theater">

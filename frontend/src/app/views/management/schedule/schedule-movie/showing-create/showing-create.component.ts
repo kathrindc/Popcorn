@@ -81,10 +81,7 @@ export class ShowingCreateComponent {
   }
 
   onSubmit() {
-    console.log(this.showingForm);
-    console.log(this.showingForm.valid, this.movieId);
     if (this.showingForm.valid && this.movieId != null) {
-      console.log('valid');
       const id = this.movieId;
       const selectedDates = this.getSelectedDates();
 
