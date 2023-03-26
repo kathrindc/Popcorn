@@ -57,7 +57,7 @@ async function add(displayNum, displayX, displayY, flagDeluxe, flagWheelchair, t
     return _doAdd(pool, displayNum, displayX, displayY, flagDeluxe, flagWheelchair, theaterId);
 }
 
-async function batchAdd(seats) {
+async function batchAdd(seats, theaterId) {
     const client = await pool.connect();
     const results = [];
 
@@ -72,7 +72,7 @@ async function batchAdd(seats) {
                 seat.displayY,
                 seat.flagDeluxe,
                 seat.flagWheelchair,
-                seat.theaterId
+                theaterId
             );
 
             results.push(result);
