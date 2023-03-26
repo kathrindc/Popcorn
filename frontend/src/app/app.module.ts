@@ -34,6 +34,7 @@ import {ScheduleComponent} from "./views/management/schedule/schedule.component"
 import {TicketsComponent} from "./views/management/tickets/tickets.component";
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import { QRCodeModule } from 'angularx-qrcode';
 import {ScheduleMovieComponent} from "./views/management/schedule/schedule-movie/schedule-movie.component";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {MatTooltipModule} from "@angular/material/tooltip";
@@ -98,6 +99,7 @@ import {SeatsCreateComponent} from "./views/management/theaters/theaters-create/
     MatSliderModule,
     MatCardModule,
     MatIconModule,
+    QRCodeModule,
     MatProgressBarModule,
     MatTooltipModule,
     MatSnackBarModule,

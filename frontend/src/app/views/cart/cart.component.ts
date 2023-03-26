@@ -32,6 +32,7 @@ export class CartComponent {
     }
 
     console.log(this.cart);
+    this.router.navigate(['/orders'])
   }
 
 }
