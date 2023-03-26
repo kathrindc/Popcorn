@@ -1,5 +1,5 @@
 <mat-toolbar>
-    <span class="brand">Popcorn</span>
+    <span class="brand" (click)="this.router.navigate(['/'])">Popcorn</span>
     <button mat-button (click)="this.router.navigate(['/'])">
         Home
     </button>

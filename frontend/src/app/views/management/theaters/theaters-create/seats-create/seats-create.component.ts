@@ -10,7 +10,7 @@ import {Theater} from "../../../../../data/theater";
 import SeatDetails from "../../../../../data/seatDetails";
 import SeatCreate from "../../../../../data/seatCreate";
 import SeatCreateNew from "../../../../../data/seatCreateNew";
-import {forkJoin, mergeMap} from "rxjs";
+import {forkJoin, mergeMap, Observable} from "rxjs";
 
 // Define a new interface to represent the 2D array of seats
 interface SeatArray {
@@ -92,8 +92,8 @@ export class SeatsCreateComponent {
             if (seat.displayY > rows) rows = seat.displayY;
           });
 
-          this.rowNumbs = rows - 1;
-          this.seatNumbs = cols - 1;
+          this.rowNumbs = rows;
+          this.seatNumbs = cols;
 
           //set grid and set all to inactive
           this.seatsCreateNew = new Array(this.rowNumbs);
@@ -114,17 +114,9 @@ export class SeatsCreateComponent {
           if (this.seatsCreateNew) {
             //set seats to previouse settings
             seats.forEach((seat) => {
-              const mySeatNew: SeatCreateNew = {
-                displayNum: "0",
-                displayX: seat.displayX,
-                displayY: seat.displayY,
-                flagDeluxe: seat.flagDeluxe,
-                flagWheelchair: seat.flagWheelchair,
-                active: true,
-              }
-              const x = Number(seat.displayX) - 1, y = Number(seat.displayY) - 1
+              const y = Number(seat.displayY) - 1, x = Number(seat.displayX) - 1
 
-              this.seatsCreateNew![x][y] = {
+              this.seatsCreateNew![y][x] = {
                 displayNum: "0",
                 displayX: seat.displayX,
                 displayY: seat.displayY,
@@ -135,7 +127,9 @@ export class SeatsCreateComponent {
 
             });
           }
+          this.seatsCreateNew.reverse();
         }
+
 
       });
 
@@ -242,8 +236,8 @@ export class SeatsCreateComponent {
         for (let j = 0; j < this.seatNumbs; j++) {
           this.seatsCreateNew[i][j] = {
             displayNum: "0",
-            displayX: i+1,
-            displayY: j+1,
+            displayX: j+1,
+            displayY: i+1,
             flagDeluxe: false,
             flagWheelchair: false,
             active: true
@@ -259,59 +253,87 @@ export class SeatsCreateComponent {
   createSeats() {
     if (this.rowNumbs !== undefined && this.seatNumbs !== undefined) {
       if (this.seatsCreateNew && this.theaterId) {
+        //observables to delete Seats
+        const deleteSeatObservables: Observable<boolean>[] = [];
         if (this.update) {
+
           //delete all seats from this theater
           this.oldSeats?.forEach((seat) => {
-            this.movieService.deleteSeat(this.theaterId!, seat.id);
-          })
-
-        }
-        let seatNumber = 1;
-        const createSeatObservables = [];
-
-        for (let i = 0; i < this.rowNumbs; i++) {
-          for (let j = 0; j < this.seatNumbs; j++) {
-            if (this.seatsCreateNew[i][j].active) {
-              const mySeatCreate: SeatCreate = {
-                displayNum: String(seatNumber),
-                displayX: this.seatsCreateNew[i][j].displayX,
-                displayY: this.seatsCreateNew[i][j].displayY,
-                flagDeluxe: this.seatsCreateNew[i][j].flagDeluxe,
-                flagWheelchair: this.seatsCreateNew[i][j].flagWheelchair,
-              }
-              seatNumber++;
-
-              createSeatObservables.push(
-                this.movieService.createSeat(this.theaterId, mySeatCreate)
-              );
-
-            }
-          }
+            deleteSeatObservables.push(
+              this.movieService.deleteSeat(this.theaterId!, seat.id)
+            );
+          });
         }
 
-        if (createSeatObservables.length > 0) {
-          forkJoin(createSeatObservables).pipe(
-            mergeMap(() => {
-              return this.router.navigate(['/management/theaters']);
-            })
-          ).subscribe({
+        //make a forkJoin if we have to wait for observables
+        if (deleteSeatObservables.length > 0) {
+          forkJoin(deleteSeatObservables).subscribe({
             next: () => {
-              this.snackBar.open('Seats created successfully!', 'Close', {
-                duration: 5000,
-                panelClass: 'success-snackbar'
-              });
+              this.saveNewSeats();
             },
             error: (err) => {
-              this.snackBar.open('Error while creating Seats!', 'Close', {
+              this.snackBar.open('Error while deleting Seats!', 'Close', {
                 duration: 3000,
                 panelClass: 'error-snackbar'
               });
             }
           });
+
         } else {
-          this.router.navigate(['/management/theaters']);
+          this.saveNewSeats();
         }
 
+      }
+    }
+
+  }
+
+  saveNewSeats() {
+    let seatNumber = 1;
+    const createSeatObservables = [];
+
+    if (this.rowNumbs && this.seatNumbs && this.seatsCreateNew && this.theaterId) {
+      for (let i = 0; i < this.rowNumbs; i++) {
+        for (let j = 0; j < this.seatNumbs; j++) {
+          if (this.seatsCreateNew[i][j].active) {
+            const mySeatCreate: SeatCreate = {
+              displayNum: String(seatNumber),
+              displayX: this.seatsCreateNew[i][j].displayX,
+              displayY: this.seatsCreateNew[i][j].displayY,
+              flagDeluxe: this.seatsCreateNew[i][j].flagDeluxe,
+              flagWheelchair: this.seatsCreateNew[i][j].flagWheelchair,
+            }
+            seatNumber++;
+
+            createSeatObservables.push(
+              this.movieService.createSeat(this.theaterId, mySeatCreate)
+            );
+
+          }
+        }
+      }
+
+      if (createSeatObservables.length > 0) {
+        forkJoin(createSeatObservables).pipe(
+          mergeMap(() => {
+            return this.router.navigate(['/management/theaters']);
+          })
+        ).subscribe({
+          next: () => {
+            this.snackBar.open('Seats created successfully!', 'Close', {
+              duration: 5000,
+              panelClass: 'success-snackbar'
+            });
+          },
+          error: (err) => {
+            this.snackBar.open('Error while creating Seats!', 'Close', {
+              duration: 3000,
+              panelClass: 'error-snackbar'
+            });
+          }
+        });
+      } else {
+        this.router.navigate(['/management/theaters']);
       }
     }
 
