@@ -1,14 +1,11 @@
 import {Component} from '@angular/core';
 import {AuthService} from "../../../../auth/auth.service";
 import {MovieService} from "../../../../api/movie.service";
-import Page from "../../../../api/page";
-import MovieBasic from "../../../../data/movieBasic";
 import {DatePipe, Location} from "@angular/common";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ActivatedRoute, Router} from "@angular/router";
 import MovieDetail from "../../../../data/movieDetail";
-
 
 
 @Component({
@@ -19,7 +16,6 @@ import MovieDetail from "../../../../data/movieDetail";
 export class MoviesCreateComponent {
   private role: string = "";
   public movieForm: FormGroup;
-  public releasedAtDate: Date = new Date();
 
   //for updating movie
   public movieId: string | null = null;
@@ -82,7 +78,6 @@ export class MoviesCreateComponent {
 
     }
 
-
   }
 
   hasRole(roles: string[]): boolean {
@@ -96,15 +91,17 @@ export class MoviesCreateComponent {
   onSubmit() {
     if (this.movieForm.valid) {
       const formData = this.movieForm.value;
-      const year = this.releasedAtDate.getFullYear();
-      const month = this.releasedAtDate.getMonth()+1 >= 10 ? this.releasedAtDate.getMonth() + 1 : '0' + (this.releasedAtDate.getMonth() + 1);
-      const date = this.releasedAtDate.getDate() >= 10 ? this.releasedAtDate.getDate() : '0' + this.releasedAtDate.getDate();
+      const releasedAtDate = new Date(formData.releasedAt);
+      const year = releasedAtDate.getFullYear();
+      const month = releasedAtDate.getMonth()+1 >= 10 ? releasedAtDate.getMonth() + 1 : '0' + (releasedAtDate.getMonth() + 1);
+      const date = releasedAtDate.getDate() >= 10 ? releasedAtDate.getDate() : '0' + releasedAtDate.getDate();
       formData.releasedAt = year + '-' + month + '-' + date;
       console.log(formData.releasedAt);
 
       //different wether it is update or create
       if (this.movieId) {
-        this.movieService.updateMovie(this.movieId, formData).subscribe({
+        formData.id = this.movieId;
+        this.movieService.updateMovie(formData).subscribe({
           next: (movie) => {
             this.router.navigate(['/management/movies']).then(() => {
               this.snackBar.open('Movie updated successfully!', 'Close', {

@@ -7,6 +7,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmDialogComponent} from "../dialogs/confirm-dialog.component";
+import {Location} from "@angular/common";
 
 @Component({
   selector: 'app-management',
@@ -23,6 +24,7 @@ export class MoviesComponent {
     private router: Router,
     private snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private location: Location,
   ) {
   }
 
@@ -66,7 +68,6 @@ export class MoviesComponent {
       }
     });
 
-
   }
 
   deleteMovie(id: string) {
@@ -90,6 +91,22 @@ export class MoviesComponent {
 
   createMovie() {
     this.router.navigate(['/management/movies/create']);
+  }
+
+  back() {
+    this.location.back();
+  }
+
+  getDateString(date: string) {
+    var myDate = new Date(date);
+    return myDate.toLocaleDateString('de-DE', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+
   }
 
 }

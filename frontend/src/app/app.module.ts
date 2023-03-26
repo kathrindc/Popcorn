@@ -42,6 +42,8 @@ import {MoviesCreateComponent} from "./views/management/movies/movies-create/mov
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 import {ConfirmDialogComponent} from "./views/management/dialogs/confirm-dialog.component";
+import {ShowingCreateComponent} from "./views/management/schedule/schedule-movie/showing-create/showing-create.component";
+import {MatCheckboxModule} from "@angular/material/checkbox";
 
 @NgModule({
   declarations: [
@@ -66,6 +68,7 @@ import {ConfirmDialogComponent} from "./views/management/dialogs/confirm-dialog.
     TheaterViewComponent,
     MoviesCreateComponent,
     ConfirmDialogComponent,
+    ShowingCreateComponent,
   ],
   imports: [
     CommonModule,
@@ -97,6 +100,7 @@ import {ConfirmDialogComponent} from "./views/management/dialogs/confirm-dialog.
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatCheckboxModule,
   ],
   providers: [
     {

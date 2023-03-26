@@ -35,7 +35,7 @@
       <div class="form-group">
         <mat-form-field class="form-field">
           <mat-label>Released At</mat-label>
-          <input matInput [matDatepicker]="picker" formControlName="releasedAt" required class="form-input" [(ngModel)]="releasedAtDate">
+          <input matInput [matDatepicker]="picker" formControlName="releasedAt" required class="form-input">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>

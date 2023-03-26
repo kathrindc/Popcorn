@@ -3,7 +3,7 @@ section:first-of-type {
   max-width: 1000px;
   width: auto;
 
-  .header-movies {
+  .header-theater {
     display: flex;
     flex-direction: row;
     h1 {
@@ -28,15 +28,15 @@ section:first-of-type {
     margin: 10px;
 
 
-    .movies {
+    .theater {
       display: flex;
 
-      .movie-left {
-        width: 80%;
+      .theater-left {
+        width: 85%;
       }
 
-      .movie-right {
-        width: 20%;
+      .theater-right {
+        width: 15%;
 
         > button {
           margin: 5px;

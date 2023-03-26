@@ -22,7 +22,6 @@ export class ManagementComponent {
         this.role = role;
       },
       error: err => {
-        //TODO: error handling
       }
     });
   }
@@ -37,14 +36,6 @@ export class ManagementComponent {
 
   navigateToMovies() {
     this.router.navigate(['management/movies']);
-  }
-
-  navigateToSchedule() {
-    this.router.navigate(['management/schedule']);
-  }
-
-  navigateToTickets() {
-    this.router.navigate(['management/tickets']);
   }
 
 }

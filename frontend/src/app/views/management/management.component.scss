@@ -5,25 +5,38 @@
 
   .card {
     cursor: pointer;
-    max-width: 400px;
-    height: 150px;
+    width: auto;
+    height: auto;
+    min-height: 150px;
     background-color: lightgray;
     margin: 10px;
+
+
+    .theater {
+      display: flex;
+
+      .theater-left {
+        width: 85%;
+      }
+
+      .theater-right {
+        width: 15%;
+
+        > button {
+          margin: 5px;
+        }
+
+      }
+
+    }
   }
 
   .theaters {
 
   }
 
-  .movies {
+  .theater {
 
   }
 
-  .schedule {
-
-  }
-
-  .tickets {
-
-  }
 }

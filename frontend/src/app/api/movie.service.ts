@@ -13,6 +13,9 @@ import Showing from '../data/showing';
 import Page from './page';
 import Order from '../data/order';
 import MovieMini from '../data/movieMini';
+import {Theaters} from "../data/theaters";
+import {Theater} from "../data/theater";
+import ShowingCreate from "../data/showingCreate";
 
 @Injectable({
   providedIn: 'root'
@@ -45,11 +48,11 @@ export class MovieService {
     return this.httpClient.post<MovieDetail>(`${this.ApiUrl}movies`, formData);
   }
 
-  updateMovie(id: string, formData: FormData): Observable<MovieDetail>{
-    return this.httpClient.put<MovieDetail>(`${this.ApiUrl}movies/${id}`, formData);
+  updateMovie(formData: FormData): Observable<MovieDetail>{
+    return this.httpClient.put<MovieDetail>(`${this.ApiUrl}movies`, formData);
   }
 
-  deleteMovie(id: string): Observable<boolean>{
+  deleteMovie(id: string): Observable<boolean> {
     return this.httpClient.delete<boolean>(`${this.ApiUrl}movies/${id}`, {
       responseType: 'json',
     });
@@ -73,6 +76,12 @@ export class MovieService {
     }) as Observable<Show>;
   }
 
+  deleteShowing(id: string): Observable<boolean>{
+    return this.httpClient.delete<boolean>(`${this.ApiUrl}shows/${id}`, {
+      responseType: 'json',
+    });
+  }
+
   getOrders(): Observable<List<Order>>{
     return this.httpClient.get(`${this.ApiUrl}my/orders`,
     {responseType: 'json',
@@ -92,9 +101,20 @@ export class MovieService {
   }
 
   getReviews(): Observable<List<Review>>{
-    return this.httpClient.get(`${this.ApiUrl}my/ratings`,
-    {responseType: 'json',
+    return this.httpClient.get(`${this.ApiUrl}my/ratings`, {
+      responseType: 'json',
   }) as Observable<List<Review>>
+  }
+
+  getTheaters(): Observable<Theaters> {
+    return this.httpClient.get<Theaters>(`${this.ApiUrl}theaters`, {
+      responseType: 'json',
+    });
+  }
+
+  createShowing(data: ShowingCreate): Observable<Showing> {
+    console.log(data);
+    return this.httpClient.post<Showing>(`${this.ApiUrl}shows`, data);
   }
 
   submitReview(movieId: string, stars: number, content: string): Observable<string> {

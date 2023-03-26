@@ -3,7 +3,7 @@ section:first-of-type {
   max-width: 1000px;
   width: auto;
 
-  .header {
+  .header-theater {
     display: flex;
     flex-direction: row;
     h1 {
@@ -27,18 +27,17 @@ section:first-of-type {
     background-color: lightgray;
     margin: 10px;
 
-    .showing {
+    .theater {
       display: flex;
 
-      .show-left {
-        width: 95%;
+      .theater-left {
+        width: 85%;
       }
 
-      .show-right {
-        width: 5%;
+      .theater-right {
+        width: 15%;
 
         > button {
-          vertical-align: middle;
           margin: 5px;
         }
 
@@ -48,3 +47,5 @@ section:first-of-type {
   }
 
 }
+
+
