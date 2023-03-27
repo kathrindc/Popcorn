@@ -28,7 +28,7 @@ export class SeatService {
     return false;
   }
 
-  
+
   getCart(): Observable<Cart>{
     return this.httpClient.get(`${this.ApiUrl}/my/cart`, {
       responseType: 'json',
