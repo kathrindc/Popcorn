@@ -8,26 +8,21 @@
   </section>
 
   <ng-container *ngIf="rows != null">
-    <div class="theater">
-      <ng-container>
-        <table>
-          <tr *ngFor="let row of rows">
-            <td *ngFor="let seat of row">
+    <table *ngIf="rows">
+      <tr *ngFor="let row of rows">
+        <td *ngFor="let seat of row">
             <span
               *ngIf="seat"
               [class]="getSeatClass(seat)"
               (click)="toggleSelect(seat)">
                 {{ seat.displayNum }}
             </span>
-              <span
-                *ngIf="!seat"
-                class="seat-box"></span>
-            </td>
-          </tr>
-        </table>
-      </ng-container>
-      <h3>---------------- Leinwand ----------------</h3>
-    </div>
+          <span
+            *ngIf="!seat"
+            class="seat-box"></span>
+        </td>
+      </tr>
+    </table>
 
     <div class="legend">
       <div class="legend-item">

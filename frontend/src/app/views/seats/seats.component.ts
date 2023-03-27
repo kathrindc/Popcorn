@@ -13,10 +13,14 @@ import Show from 'src/app/data/show';
 export class SeatsComponent implements OnInit {
 
   public show: Show | null = null;
-  public rows: (Seat | null)[][] | null = null;
   public selectionMap: any = {};
   public selectedSeats: Seat[] = [];
   public selSeatNumbs: number[] = [];
+
+  public rows: (Seat | null)[][] | undefined;
+  public rowNumbs: number | undefined;
+  public seatNumbs: number | undefined;
+
 
   constructor(
     public movieService: MovieService,
@@ -36,34 +40,44 @@ export class SeatsComponent implements OnInit {
 
     this.movieService.getShowForId(showId)
       .subscribe((show) => {
-        let rows: (Seat | null)[][] = [], lastY = 1;
-        let row: (Seat | null)[] = [], nextX = 0;
+        let rows = 0;
+        let cols = 0;
+        show.seats.forEach((seat) => {
+          if (seat.displayX > cols) cols = seat.displayX;
+          if (seat.displayY > rows) rows = seat.displayY;
+        });
 
-        for (let seat of show.seats) {
-          if (lastY != seat.displayY) {
-            lastY = seat.displayY;
-            nextX = 0;
+        this.rowNumbs = rows;
+        this.seatNumbs = cols;
 
-            rows.push(row);
-            row = [];
+        this.rows = new Array(this.rowNumbs);
+        for (let i = 0; i < this.rowNumbs; i++) {
+          this.rows[i] = new Array(this.seatNumbs);
+          for (let j = 0; j < this.seatNumbs; j++) {
+            this.rows[i][j] = null;
           }
-
-          nextX += 1;
-
-          while (nextX < seat.displayX) {
-            nextX += 1;
-            row.push(null);
-          }
-
-          row.push(seat);
         }
 
-        if (row.length > 0) {
-          rows.push(row);
-        }
+        if (this.rows) {
+          //set seats to previouse settings
+          show.seats.forEach((seat) => {
+            const y = Number(seat.displayY) - 1, x = Number(seat.displayX) - 1
 
+            this.rows![y][x] = {
+              id: seat.id,
+              displayNum: seat.displayNum,
+              displayX: seat.displayX,
+              displayY: seat.displayY,
+              flagDeluxe: seat.flagDeluxe,
+              flagWheelchair: seat.flagWheelchair,
+              isFree: seat.isFree,
+            }
+
+          });
+        }
+        this.rows.reverse();
         this.show = show;
-        this.rows = rows.reverse();
+
       });
   }
 
@@ -71,7 +85,7 @@ export class SeatsComponent implements OnInit {
     event.preventDefault();
 
     for(let i=0; i<this.selectedSeats.length; i++){
-      this.selSeatNumbs[i]=this.selectedSeats[i].displayNum
+      this.selSeatNumbs[i]=this.selectedSeats[i].id
     }
 
     if(await this.seatService.tryAddCart(this.show?.id, this.selSeatNumbs)){
