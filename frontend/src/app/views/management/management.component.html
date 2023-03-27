@@ -1,0 +1,27 @@
+<section *ngIf="hasRole(['manager', 'admin'])">
+  <section class="section">
+    <mat-card (click)="navigateToMovies()" class="card theater">
+      <mat-card-header>
+        <mat-card-title>Movies</mat-card-title>
+        <mat-icon mat-card-avatar>movie</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Go to Movie Overview</p>
+      </mat-card-content>
+    </mat-card>
+
+
+    <mat-card (click)="navigateToTheaters()" class="card theaters">
+      <mat-card-header>
+        <mat-card-title>Theaters</mat-card-title>
+        <mat-icon mat-card-avatar>theaters</mat-icon>
+      </mat-card-header>
+      <mat-card-content>
+        <p>Create, Modify, Delete Theaters</p>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+
+</section>

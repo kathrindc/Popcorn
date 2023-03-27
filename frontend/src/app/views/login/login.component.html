@@ -1,0 +1,13 @@
+<form>
+    <mat-form-field>
+        <mat-label>E-Mail</mat-label>
+        <input matInput placeholder="user@example.com" type="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Passwort</mat-label>
+        <input matInput placeholder="***********" type="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="doLogin($event)">
+        Login
+    </button>
+</form>

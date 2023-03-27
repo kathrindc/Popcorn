@@ -1,0 +1,48 @@
+<div *ngIf="movie != null">
+    <h1>
+        {{ movie.name }}
+    </h1>
+    <div *ngIf="movie.posterUrl != null">
+        <img src="{{ movie.posterUrl }}" />
+    </div>
+    <hr/>
+    <div class="container">
+        <ul>
+            <li>
+                <span>
+                    {{movie.description}}
+                </span>
+            </li>
+            <li>
+                <span>
+                    Duration: {{movie.duration}}
+                </span>
+            </li>
+            <li>
+                <span>
+                    Minimum Age: {{movie.minimumAge}}
+                </span>
+            </li>
+            <li>
+                <span>
+                    Release Date: {{movie.releasedAt}}
+                </span>
+            </li>
+            <li *ngIf="movie.imdbUrl != null && movie.imdbUrl.length>0">
+                <span>
+                    <a [href]="movie.imdbUrl">IMDB Page</a>
+                </span>
+            </li>
+        </ul>
+        <ul *ngIf="showings != null">
+            Showings:
+            <li *ngFor="let showing of showings">
+                <a [routerLink]="['/shows', showing.id, showing.theaterId]">
+                    Start time: {{showing.startsAt}} <br>
+                    Free seats: {{showing.freeSeats}} <br>
+                    {{showing.variant}}
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

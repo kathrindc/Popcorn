@@ -1,0 +1,42 @@
+.section:first-of-type {
+  margin: 20px auto;
+  max-width: 1000px;
+  width: auto;
+
+  .card {
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    min-height: 150px;
+    background-color: lightgray;
+    margin: 10px;
+
+
+    .theater {
+      display: flex;
+
+      .theater-left {
+        width: 85%;
+      }
+
+      .theater-right {
+        width: 15%;
+
+        > button {
+          margin: 5px;
+        }
+
+      }
+
+    }
+  }
+
+  .theaters {
+
+  }
+
+  .theater {
+
+  }
+
+}

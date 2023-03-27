@@ -1,0 +1,50 @@
+section:first-of-type {
+  margin: 20px auto;
+  max-width: 1000px;
+  width: auto;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    h1 {
+      vertical-align: middle;
+      margin-right: 10px;
+      width: 95%;
+    }
+
+    button {
+      vertical-align: middle;
+      width: 50px;
+      height: 50px;
+    }
+
+  }
+
+  .card {
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    background-color: lightgray;
+    margin: 10px;
+
+    .showing {
+      display: flex;
+
+      .show-left {
+        width: 95%;
+      }
+
+      .show-right {
+        width: 5%;
+
+        > button {
+          vertical-align: middle;
+          margin: 5px;
+        }
+
+      }
+
+    }
+  }
+
+}
