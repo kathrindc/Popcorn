@@ -375,6 +375,79 @@ module.exports = (fastify, _, done) => {
         }
     );
 
+    fastify.post('/:theaterId/seats/batch',
+        {
+            onRequest: [
+                fastify.authenticate('admin', 'manager'),
+            ],
+            schema: {
+                summary: 'Add a batch of seats to a theater',
+                description: 'The client may use this endpoint to add multiple seats to a theater. Usage of this route is restricted to clients with the roles "admin" or "manager".',
+                tags: ['theaters', 'manage'],
+                security: [{ bearer: [] }],
+                params: {
+                    type: 'object',
+                    required: ['theaterId'],
+                    properties: {
+                        theaterId: { type: 'string', minLength: 1 },
+                    },
+                },
+                body: {
+                    type: 'array',
+                    items: {
+                        type: 'object',
+                        required: ['displayNum', 'displayX', 'displayY', 'flagDeluxe', 'flagWheelchair'],
+                        properties: {
+                            displayNum: { type: 'string', minLength: 1 },
+                            displayX: { type: 'integer', minimum: 0 },
+                            displayY: { type: 'integer', minimum: 0 },
+                            flagDeluxe: { type: 'boolean' },
+                            flagWheelchair: { type: 'boolean' },
+                        },
+                    }
+                },
+                response: {
+                    201: {
+                        description: 'The client succesfully added a batch of seats to the theater.',
+                        type: 'array',
+                        items: {
+                            type: 'object',
+                            properties: {
+                                id: { type: 'string' }
+                            }
+                        }
+                    },
+                    401: {
+                        description: 'The client is not authenticated.',
+                        $ref: 'error',
+                    },
+                    403: {
+                        description: 'The client does not posses sufficient privileges to use this endpoint.',
+                        $ref: 'error',
+                    },
+                    404: {
+                        description: 'The client attempted to add a seat to a theater that does not or no longer exists.',
+                        $ref: 'error',
+                    },
+                },
+            },
+        },
+        async (request, reply) => {
+            if (! (await Theater.exists(request.params.theaterId))) {
+                throw fastify.httpErrors.notFound(TheaterNotFound);
+            }
+
+            const seats = await Seat.batchAdd(
+                request.body,
+                request.params.theaterId
+            );
+
+            reply.code(201);
+
+            return seats.map(seat => ({ id: seat.id }));
+        }
+    );
+
     fastify.put('/:theaterId/seats',
         {
             onRequest: [

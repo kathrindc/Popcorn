@@ -55,7 +55,7 @@ async function remove(id) {
 
 async function exists(id) {
     const res = await pool.query(
-        'SELECT "id" FROM "id" = $1',
+        'SELECT "id" FROM theaters WHERE "id" = $1',
         [id]
     );
 
